@@ -268,8 +268,40 @@ function refreshDeck()
 // Refresh hands on page
 function refreshHands()
 {
+	//hand1
+	if(hand1[0]) document.getElementById("hand1_card1").innerHTML = hand1[0];
+	else document.getElementById("hand1_card1").innerHTML = "";
+	if(hand1[1]) document.getElementById("hand1_card2").innerHTML = hand1[1];
+	else document.getElementById("hand1_card2").innerHTML = "";
+	if(hand1[2]) document.getElementById("hand1_card3").innerHTML = hand1[2];
+	else document.getElementById("hand1_card3").innerHTML = "";
+	if(hand1[3]) document.getElementById("hand1_card4").innerHTML = hand1[3];
+	else document.getElementById("hand1_card4").innerHTML = "";
+	if(hand1[4]) document.getElementById("hand1_card5").innerHTML = hand1[4];
+	else document.getElementById("hand1_card5").innerHTML = "";
+	if(hand1[5]) document.getElementById("hand1_card6").innerHTML = hand1[5];
+	else document.getElementById("hand1_card6").innerHTML = "";
+	if(hand1[6]) document.getElementById("hand1_card7").innerHTML = hand1[6];
+	else document.getElementById("hand1_card7").innerHTML = "";
+	
 	document.getElementById("hand1Container").innerHTML = JSON.stringify(hand1);
 	document.getElementById("hand1_remaining").innerHTML = hand1.length;
+	
+	//hand2
+	if(hand2[0]) document.getElementById("hand2_card1").innerHTML = hand2[0];
+	else document.getElementById("hand2_card1").innerHTML = "";
+	if(hand2[1]) document.getElementById("hand2_card2").innerHTML = hand2[1];
+	else document.getElementById("hand2_card2").innerHTML = "";
+	if(hand2[2]) document.getElementById("hand2_card3").innerHTML = hand2[2];
+	else document.getElementById("hand2_card3").innerHTML = "";
+	if(hand2[3]) document.getElementById("hand2_card4").innerHTML = hand2[3];
+	else document.getElementById("hand2_card4").innerHTML = "";
+	if(hand2[4]) document.getElementById("hand2_card5").innerHTML = hand2[4];
+	else document.getElementById("hand2_card5").innerHTML = "";
+	if(hand2[5]) document.getElementById("hand2_card6").innerHTML = hand2[5];
+	else document.getElementById("hand2_card6").innerHTML = "";
+	if(hand2[6]) document.getElementById("hand2_card7").innerHTML = hand2[6];
+	else document.getElementById("hand2_card7").innerHTML = "";
 	
 	document.getElementById("hand2Container").innerHTML = JSON.stringify(hand2);
 	document.getElementById("hand2_remaining").innerHTML = hand2.length;

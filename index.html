@@ -9,10 +9,12 @@
 .yellow {color: #bcbf2f;}
 .special (color: red;)
 .card:hover {font-weight:bold; text-decoration:underline;}
+#packContainer span {font-size:24px;}
+.handJSON {font-size:10px;}
+#deckContainer {font-size:10px; width:300px;}
 </style>
 </head>
 <body>
-
 <div style="position: fixed; right:0px; top: 0; width:400px; font-size: 10px;">
 		<p>WHIP - Wild card that can be played anywhere</p>
 		<p>APEX JUMP - Skip over a tier, still must have a card to match the next tier</p>
@@ -23,12 +25,9 @@
 		<p>TRACK CUT - The other jammer must move to the space immediately behind you</p>
 		<p>FORCE CALL OFF - Even if you do not have lead</p>
 </div>
-<div style="float:left; width: 800px;">
-<h2>DECK</h2>
-Cards Remaining: <span id="deck_remaining"></span>
-<div id="deckContainer"></div>
+<div style="float:left; width: 700px;">
+<h2>SETUP</h2>
 <button id="shuffle_button" onclick="buildDeck()">SETUP GAME</button>
-<button id="shuffle_button" onclick="shuffle(deck)">SHUFFLE</button>
 
 <h2>THE PACK</h2>
 <div id="packContainer">
@@ -37,50 +36,87 @@ Cards Remaining: <span id="deck_remaining"></span>
 Swap Pack Position: <input size="3" type="text" id="swap_pos1"> And: <input size="3" type="text" id="swap_pos2"><button id="swap_blocker" onclick="swapBlockers(document.getElementById('swap_pos1').value,document.getElementById('swap_pos2').value)">SWAP</button><br>
 
 <h2>PLAYER 1 HAND</h2>
-Score: <input size="3" type="number"><br>
+Score: <input size="3" type="number">
+<br>
 Hand: <span id="hand1_remaining"></span>
-<div id="hand1Container"></div>
+<br>
 <button id="deal_hand1" onclick="deal(hand1)">DEAL ONE</button>
-<br>
-<button name="deal_hand1" onclick="discard(hand1,0)">DISCARD 1</button>
-<button name="deal_hand1" onclick="discard(hand1,1)">DISCARD 2</button>
-<button name="deal_hand1" onclick="discard(hand1,2)">DISCARD 3</button>
-<button name="deal_hand1" onclick="discard(hand1,3)">DISCARD 4</button>
-<button name="deal_hand1" onclick="discard(hand1,4)">DISCARD 5</button>
-<button name="deal_hand1" onclick="discard(hand1,5)">DISCARD 6</button>
-<button name="deal_hand1" onclick="discard(hand1,6)">DISCARD 7</button>
-<br>
+<table>
+<tr>
+	<td><div id="hand1_card1"></div></td>
+	<td><div id="hand1_card2"></div></td>
+	<td><div id="hand1_card3"></div></td>
+	<td><div id="hand1_card4"></div></td>
+	<td><div id="hand1_card5"></div></td>
+	<td><div id="hand1_card6"></div></td>
+	<td><div id="hand1_card7"></div></td>
+</tr>
+<tr>
+	<td><button name="deal_hand1" onclick="discard(hand1,0)">DISCARD 1</button></td>
+	<td><button name="deal_hand1" onclick="discard(hand1,1)">DISCARD 2</button></td>
+	<td><button name="deal_hand1" onclick="discard(hand1,2)">DISCARD 3</button></td>
+	<td><button name="deal_hand1" onclick="discard(hand1,3)">DISCARD 4</button></td>
+	<td><button name="deal_hand1" onclick="discard(hand1,4)">DISCARD 5</button></td>
+	<td><button name="deal_hand1" onclick="discard(hand1,5)">DISCARD 6</button></td>
+	<td><button name="deal_hand1" onclick="discard(hand1,6)">DISCARD 7</button></td>
+</tr>
+<tr>
+	<td><button name="swap_hand1" onclick="swap(hand1,0,document.getElementById('swap_hand1').value)">SWAP 1</button></td>
+	<td><button name="swap_hand1" onclick="swap(hand1,1,document.getElementById('swap_hand1').value)">SWAP 2</button></td>
+	<td><button name="swap_hand1" onclick="swap(hand1,2,document.getElementById('swap_hand1').value)">SWAP 3</button></td>
+	<td><button name="swap_hand1" onclick="swap(hand1,3,document.getElementById('swap_hand1').value)">SWAP 4</button></td>
+	<td><button name="swap_hand1" onclick="swap(hand1,4,document.getElementById('swap_hand1').value)">SWAP 5</button></td>
+	<td><button name="swap_hand1" onclick="swap(hand1,5,document.getElementById('swap_hand1').value)">SWAP 6</button></td>
+	<td><button name="swap_hand1" onclick="swap(hand1,6,document.getElementById('swap_hand1').value)">SWAP 7</button></td>
+</tr>
+</table>
 Swap Pack Position:<input size="3" type="text" id="swap_hand1"><br>
-<button name="swap_hand1" onclick="swap(hand1,0,document.getElementById('swap_hand1').value)">SWAP 1</button>
-<button name="swap_hand1" onclick="swap(hand1,1,document.getElementById('swap_hand1').value)">SWAP 2</button>
-<button name="swap_hand1" onclick="swap(hand1,2,document.getElementById('swap_hand1').value)">SWAP 3</button>
-<button name="swap_hand1" onclick="swap(hand1,3,document.getElementById('swap_hand1').value)">SWAP 4</button>
-<button name="swap_hand1" onclick="swap(hand1,4,document.getElementById('swap_hand1').value)">SWAP 5</button>
-<button name="swap_hand1" onclick="swap(hand1,5,document.getElementById('swap_hand1').value)">SWAP 6</button>
-<button name="swap_hand1" onclick="swap(hand1,6,document.getElementById('swap_hand1').value)">SWAP 7</button>
+<div id="hand1Container" class="handJSON"></div>
+<br>
 
 <h2>PLAYER 2 HAND</h2>
-Score: <input size="3" type="number"><br>
-Hand: <span id="hand2_remaining"></span>
-<div id="hand2Container"></div>
-<button name="deal_hand2" onclick="deal(hand2)">DEAL ONE</button><br>
-<button name="deal_hand2" onclick="discard(hand2,0)">DISCARD 1</button>
-<button name="deal_hand2" onclick="discard(hand2,1)">DISCARD 2</button>
-<button name="deal_hand2" onclick="discard(hand2,2)">DISCARD 3</button>
-<button name="deal_hand2" onclick="discard(hand2,3)">DISCARD 4</button>
-<button name="deal_hand2" onclick="discard(hand2,4)">DISCARD 5</button>
-<button name="deal_hand2" onclick="discard(hand2,5)">DISCARD 6</button>
-<button name="deal_hand2" onclick="discard(hand2,6)">DISCARD 7</button>
+Score: <input size="3" type="number">
 <br>
+Hand: <span id="hand2_remaining"></span>
+<br>
+<button name="deal_hand2" onclick="deal(hand2)">DEAL ONE</button><br>
+<table>
+<tr>
+	<td><div id="hand2_card1"></div></td>
+	<td><div id="hand2_card2"></div></td>
+	<td><div id="hand2_card3"></div></td>
+	<td><div id="hand2_card4"></div></td>
+	<td><div id="hand2_card5"></div></td>
+	<td><div id="hand2_card6"></div></td>
+	<td><div id="hand2_card7"></div></td>
+</tr>
+<tr>
+	<td><button name="deal_hand2" onclick="discard(hand2,0)">DISCARD 1</button></td>
+	<td><button name="deal_hand2" onclick="discard(hand2,1)">DISCARD 2</button></td>
+	<td><button name="deal_hand2" onclick="discard(hand2,2)">DISCARD 3</button></td>
+	<td><button name="deal_hand2" onclick="discard(hand2,3)">DISCARD 4</button></td>
+	<td><button name="deal_hand2" onclick="discard(hand2,4)">DISCARD 5</button></td>
+	<td><button name="deal_hand2" onclick="discard(hand2,5)">DISCARD 6</button></td>
+	<td><button name="deal_hand2" onclick="discard(hand2,6)">DISCARD 7</button></td>
+</tr>
+<tr>
+	<td><button name="swap_hand2" onclick="swap(hand2,0,document.getElementById('swap_hand2').value)">SWAP 1</button></td>
+	<td><button name="swap_hand2" onclick="swap(hand2,1,document.getElementById('swap_hand2').value)">SWAP 2</button></td>
+	<td><button name="swap_hand2" onclick="swap(hand2,2,document.getElementById('swap_hand2').value)">SWAP 3</button></td>
+	<td><button name="swap_hand2" onclick="swap(hand2,3,document.getElementById('swap_hand2').value)">SWAP 4</button></td>
+	<td><button name="swap_hand2" onclick="swap(hand2,4,document.getElementById('swap_hand2').value)">SWAP 5</button></td>
+	<td><button name="swap_hand2" onclick="swap(hand2,5,document.getElementById('swap_hand2').value)">SWAP 6</button></td>
+	<td><button name="swap_hand2" onclick="swap(hand2,6,document.getElementById('swap_hand2').value)">SWAP 7</button></td>
+</tr>
+</table>
 Swap Pack Position:<input size="3" type="text" id="swap_hand2"><br>
-<button name="swap_hand2" onclick="swap(hand2,0,document.getElementById('swap_hand2').value)">SWAP 1</button>
-<button name="swap_hand2" onclick="swap(hand2,1,document.getElementById('swap_hand2').value)">SWAP 2</button>
-<button name="swap_hand2" onclick="swap(hand2,2,document.getElementById('swap_hand2').value)">SWAP 3</button>
-<button name="swap_hand2" onclick="swap(hand2,3,document.getElementById('swap_hand2').value)">SWAP 4</button>
-<button name="swap_hand2" onclick="swap(hand2,4,document.getElementById('swap_hand2').value)">SWAP 5</button>
-<button name="swap_hand2" onclick="swap(hand2,5,document.getElementById('swap_hand2').value)">SWAP 6</button>
-<button name="swap_hand2" onclick="swap(hand2,6,document.getElementById('swap_hand2').value)">SWAP 7</button>
+<div id="hand2Container" class="handJSON"></div>
 
+
+<h2>DECK</h2>
+Cards Remaining: <span id="deck_remaining"></span>
+<div id="deckContainer"></div>
+<button id="shuffle_button" onclick="shuffle(deck)">RE-SHUFFLE</button>
 </div>
 </body>
 </html>
