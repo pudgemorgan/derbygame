@@ -170,17 +170,17 @@ function dealPack(element)
 	
 	var tempTable = "<table><tr>";
 	
-	tempTable += "<td><div class='pack' id='pack1'>" + pack[0] + "</div><input type='checkbox'></td>";
-	tempTable += "<td><div class='pack' id='pack2'>" + pack[1] + "</div><input type='checkbox'></td>";
-	tempTable += "<td><div class='pack' id='pack3'>" + pack[2] + "</div><input type='checkbox'></td>";
-	tempTable += "<td><div class='pack' id='pack4'>" + pack[3] + "</div><input type='checkbox'></td>";
+	tempTable += "<td><div class='pack' id='pack1'>" + pack[0] + "</div><br><div class='checkbox' id='checkbox1' onclick='toggle(this.id,this.getAttribute(&quot;data-state&quot;))' data-state='0'></div></td>";
+	tempTable += "<td><div class='pack' id='pack2'>" + pack[1] + "</div><br><div class='checkbox' id='checkbox2' onclick='toggle(this.id,this.getAttribute(&quot;data-state&quot;))' data-state='0'></div></td>";
+	tempTable += "<td><div class='pack' id='pack3'>" + pack[2] + "</div><br><div class='checkbox' id='checkbox3' onclick='toggle(this.id,this.getAttribute(&quot;data-state&quot;))' data-state='0'></div></td>";
+	tempTable += "<td><div class='pack' id='pack4'>" + pack[3] + "</div><br><div class='checkbox' id='checkbox4' onclick='toggle(this.id,this.getAttribute(&quot;data-state&quot;))' data-state='0'></div></td>";
 	
 	tempTable += "</tr><tr>";
 
-	tempTable += "<td><div class='pack' id='pack5'>" + pack[4] + "</div><input type='checkbox'></td>";
-	tempTable += "<td><div class='pack' id='pack6'>" + pack[5] + "</div><input type='checkbox'></td>";
-	tempTable += "<td><div class='pack' id='pack7'>" + pack[6] + "</div><input type='checkbox'></td>";
-	tempTable += "<td><div class='pack' id='pack8'>" + pack[7] + "</div><input type='checkbox'></td>";
+	tempTable += "<td><div class='pack' id='pack5'>" + pack[4] + "</div><br><div class='checkbox' id='checkbox5' onclick='toggle(this.id,this.getAttribute(&quot;data-state&quot;))' data-state='0'></div></td>";
+	tempTable += "<td><div class='pack' id='pack6'>" + pack[5] + "</div><br><div class='checkbox' id='checkbox6' onclick='toggle(this.id,this.getAttribute(&quot;data-state&quot;))' data-state='0'></div></td>";
+	tempTable += "<td><div class='pack' id='pack7'>" + pack[6] + "</div><br><div class='checkbox' id='checkbox7' onclick='toggle(this.id,this.getAttribute(&quot;data-state&quot;))' data-state='0'></div></td>";
+	tempTable += "<td><div class='pack' id='pack8'>" + pack[7] + "</div><br><div class='checkbox' id='checkbox8' onclick='toggle(this.id,this.getAttribute(&quot;data-state&quot;))' data-state='0'></div></td>";
 	
 	tempTable += "</tr></table>";
 	
@@ -307,8 +307,34 @@ function refreshHands()
 	document.getElementById("hand2_remaining").innerHTML = hand2.length;
 }
 
-
-
+function toggle(item,state)
+{
+	var thisCheckbox = document.getElementById(item);
+	
+	if(state==0)
+	{
+		thisCheckbox.setAttribute('data-state',1);
+		thisCheckbox.className = "checkbox1";
+	}
+	else if(state==1)
+	{
+		thisCheckbox.setAttribute('data-state',2);
+		thisCheckbox.className = "checkbox2";
+	}
+	else if(state==2)
+	{
+		thisCheckbox.setAttribute('data-state',0);
+		thisCheckbox.className = "checkbox";
+	}
+	
+	else
+	{
+		thisCheckbox.setAttribute('data-state',0);
+		thisCheckbox.className = "checkbox";
+	}
+	
+	
+}
 
 
 
